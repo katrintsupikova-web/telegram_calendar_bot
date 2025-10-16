@@ -1,3 +1,6 @@
-pyTelegramBotAPI==4.15.4
-gspread==6.1.2
-google-auth==2.35.0
+pyTelegramBotAPI
+gspread
+google-auth
+google-auth-oauthlib
+google-auth-httplib2
+oauth2client
