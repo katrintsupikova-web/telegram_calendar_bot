@@ -4,6 +4,7 @@ from google.oauth2.service_account import Credentials
 import telebot
 from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton
 import os
+import json
 
 # === Настройки ===
 TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN")
@@ -24,7 +25,9 @@ SCOPES = [
     "https://www.googleapis.com/auth/drive"
 ]
 
-creds = Credentials.from_service_account_file(GOOGLE_CREDS_FILE, scopes=SCOPES)
+creds_json = json.loads(os.environ["GOOGLE_CREDS_FILE"])
+creds = Credentials.from_service_account_info(creds_json, scopes=SCOPES)
+
 gc = gspread.authorize(creds)
 sheet = gc.open(SPREADSHEET_NAME).sheet1
 
@@ -138,3 +141,4 @@ def plantomorrow(message):
 # --- Запуск ---
 if __name__ == "__main__":
     bot.infinity_polling()
+
